@@ -1,0 +1,16 @@
+pages:
+  stage: deploy
+  image: alpine:latest
+
+  script:
+    - mkdir -p public
+    - cp index.html public/
+    - echo "$CI_PAGES_URL" > pages_url.txt
+
+  artifacts:
+    paths:
+      - public
+      - pages_url.txt
+
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
